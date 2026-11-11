@@ -2,7 +2,7 @@
   "ok": true,
   "schemaVersion": 1,
   "package": "@petercjl/toapiscli",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "kind": "cli-skill",
   "skills": [
     "toapiscli"
