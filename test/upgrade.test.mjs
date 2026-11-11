@@ -23,7 +23,7 @@ test('real npm candidate auto-upgrade uses new isolated entry; published 0.1.0 u
  const sp=path.join(candidate,'skills/toapiscli/SKILL.md');const skill=await fs.readFile(sp,'utf8');await fs.copyFile(sp,sp+'.backup');await fs.writeFile(sp,skill.replaceAll(VERSION,next));await fs.unlink(sp+'.backup');
  for(const file of ['capabilities.json','skills/toapiscli/.runtime/package.json','skills/toapiscli/.runtime/capabilities.json']){const f=path.join(candidate,file);const d=JSON.parse(await fs.readFile(f,'utf8'));await fs.copyFile(f,f+'.backup');d.version=next;await fs.writeFile(f,JSON.stringify(d));await fs.unlink(f+'.backup');}
  const packed=await npm(['pack','--ignore-scripts','--json','--pack-destination',root],{cwd:candidate});assert.equal(packed.code,0,packed.stderr);
- const tarball=await fs.readFile(path.join(root,JSON.parse(packed.stdout)[0].filename));
+ const archives=(await fs.readdir(root)).filter(f=>f.endsWith('.tgz'));assert.equal(archives.length,1,'npm must create exactly one candidate archive');const tarball=await fs.readFile(path.join(root,archives[0]));
  let registry;const server=http.createServer((req,res)=>{if(req.url.endsWith('.tgz')){res.end(tarball);return;}res.setHeader('content-type','application/json');res.end(JSON.stringify({name:PACKAGE,'dist-tags':{latest:next},versions:{[next]:{name:PACKAGE,version:next,dist:{tarball:registry+'/candidate.tgz',integrity:'sha512-'+crypto.createHash('sha512').update(tarball).digest('base64')}}}}));});
  await new Promise(r=>server.listen(0,'127.0.0.1',r));registry='http://127.0.0.1:'+server.address().port;
  const npmrc=path.join(root,'npmrc');await fs.writeFile(npmrc,'@petercjl:registry='+registry+'\n',{flag:'wx'});
