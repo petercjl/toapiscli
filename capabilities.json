@@ -96,10 +96,11 @@
           "type": "boolean"
         }
       },
-      "sideEffects": "none",
+      "sideEffects": "package-and-skill-update",
       "effects": [
         "free-network",
-        "update-cache"
+        "update-cache",
+        "automatic-compatible-update"
       ]
     },
     "models docs": {
@@ -159,11 +160,12 @@
           "type": "string"
         }
       },
-      "sideEffects": "local-write",
+      "sideEffects": "package-and-skill-update",
       "effects": [
         "paid-generation",
         "reference-upload",
-        "task-files"
+        "task-files",
+        "automatic-compatible-update"
       ]
     },
     "task get": {
@@ -330,6 +332,45 @@
         "backup"
       ]
     },
+    "prepare": {
+      "options": {
+        "--json": {
+          "type": "boolean"
+        },
+        "--help": {
+          "type": "boolean"
+        }
+      },
+      "sideEffects": "package-and-skill-update",
+      "effects": [
+        "registry-read",
+        "automatic-compatible-update",
+        "backup"
+      ]
+    },
+    "update policy": {
+      "options": {
+        "--json": {
+          "type": "boolean"
+        },
+        "--help": {
+          "type": "boolean"
+        },
+        "--target": {
+          "type": "string"
+        },
+        "--agent": {
+          "type": "string"
+        },
+        "--mode": {
+          "type": "string"
+        }
+      },
+      "sideEffects": "none",
+      "effects": [
+        "installation-policy"
+      ]
+    },
     "update check": {
       "options": {
         "--json": {
@@ -442,18 +483,22 @@
     "isolatedRuntimeRequired": true
   },
   "automaticUpdates": {
-    "trigger": "models list and image generate",
+    "trigger": "prepare, models list and image generate; selected target-owned runtime",
     "timeoutMs": 1200,
     "cacheHours": 24,
     "optOut": "TOAPISCLI_UPDATE_CHECK=0",
-    "automaticInstall": false,
+    "automaticInstall": true,
     "installCommand": "update install --target <exact-directory> --yes",
     "scope": "selected Agent runtime and Skill; global bootstrap unchanged",
     "enabledByDefault": true,
     "intervalHours": 24,
     "configuration": "TOAPISCLI_UPDATE_CHECK",
     "disable": "TOAPISCLI_UPDATE_CHECK=0",
-    "recovery": "Offline keeps installed runtime; explicit update stages package and backs up selected Skill."
+    "policyCommand": "update policy --target <exact-directory> --mode auto|off",
+    "policyStorage": "outside package, scoped by exact target",
+    "compatibility": "stable same major; for 0.x same minor",
+    "disableInstall": "TOAPISCLI_AUTO_UPDATE=0",
+    "recovery": "Offline/failure uses verified previous runtime; interrupted sync blocks tasks until recovery."
   },
   "discoveryContract": {
     "schemaVersion": 1,

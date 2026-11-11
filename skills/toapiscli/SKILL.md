@@ -16,6 +16,12 @@ metadata:
 
 本 Skill 与运行时由同一 npm 包管理，版本为 `0.1.0`。包安装和更新说明见包根 INSTALL.md、UPDATE.md；升级只同步当前 Agent 明确指定的目录。
 
+## 自动更新
+
+首次使用及新任务开始时运行 `CLI prepare --json`。安装时为当前精确目录保存自动更新策略；日常使用自动安装兼容稳定新版（0.x 同 minor，1.x 起同 major），备份并校验当前 Skill 和独立运行时。若返回 `status: updated`，重新读取本目录完整 SKILL.md、从返回的 updatedEntry 探测能力，再进入下方主线。缓存检查约 24 小时，离线或安全冲突保留已验证旧版；本地修改保留并报告。`RECOVERY_REQUIRED` 时暂停任务，交付恢复回执和备份路径。已提交任务始终使用原目录查询。
+
+手动管理入口：`CLI update policy --target <本目录> --mode auto|off --json`；`TOAPISCLI_AUTO_UPDATE=0` 暂停安装，`TOAPISCLI_UPDATE_CHECK=0` 关闭检测和安装。其他宿主独立管理。版本、帮助和任务查询不触发更新。
+
 ## 主线
 
 1. **检查凭证**：`CLI auth status --json`。尚未配置时，请用户提供管理员配置文件的路径或附件；执行 `CLI auth import --file <文件绝对路径> --json`，再回到本步骤。让 CLI 读取文件，Agent 无需查看文件内容。已有配置需要替换时先告知存在的配置，并在获得替换授权后使用 `--replace`，保留备份。
@@ -38,4 +44,4 @@ metadata:
 - `PATH_EXISTS`：使用新的输出目录；恢复既有任务则进入步骤 4。
 - MCP 认证、参数或服务故障：保留错误和任务证据。维持 ToAPIs MCP 路由，向用户报告缺口。
 
-新出现的可重复错误应在单独授权的维护任务中修复 CLI／Skill 合同；运行期间保持已安装版本和用户选择。
+新出现的可重复错误应在单独授权的维护任务中修复 CLI／Skill 合同；运行期间保持用户选择，更新由上述 CLI 合同执行。

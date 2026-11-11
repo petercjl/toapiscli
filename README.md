@@ -14,9 +14,9 @@
 
 > 用 toapiscli 的 gemini-nano-banana-2.1 生成一张 2K 正方形图片：一只橘猫坐在窗边，旁边有一杯咖啡，温暖晨光，写实摄影。
 
-更新：
+日常使用会自动更新兼容的稳定新版，无需员工发送更新指令。已安装旧版的用户首次启用时，向当前 Agent 发送：
 
-> 更新 @petercjl/toapiscli，检查当前 Agent 的安装与 Skill。
+> 更新 @petercjl/toapiscli。
 
 更换员工配置文件：
 
@@ -24,6 +24,6 @@
 
 支持模型：doubao-seedream-5-5、gemini-nano-banana-2.1、gpt-image-2.6-sunburst。服务端 Key 决定实际权限和额度。这个包提供员工消费能力；管理员的 Key 创建和权限调整通过独立控制台执行。
 
-普通任务入口会限时检查新版并缓存 24 小时；自动安装默认关闭。支持 macOS、Windows、Linux 的 Node.js 接口；真实宿主和操作系统测试范围见开发验收记录，设计兼容性不代表所有环境均已实测。
+普通任务入口会限时检查新版并缓存约 24 小时；安装时为当前 Agent 保存自动更新策略。兼容范围为 0.x 的同 minor、1.x 起的同 major 稳定版本；范围外新版会提示。离线或更新失败时继续使用已验证旧版，配置与已有任务保留。支持 macOS、Windows、Linux 的 Node.js 接口；真实宿主和操作系统测试范围见开发验收记录，设计兼容性不代表所有环境均已实测。
 
 开发者合同：运行 `toapiscli capabilities --json` 查看命令、参数、维护及认证文件格式。使用 `TOAPISCLI_CONFIG_DIR` 显式隔离用户配置；`TOAPISCLI_UPDATE_CHECK=0` 关闭更新检测。Windows 凭证目录需由当前用户的配置目录 ACL 保护，POSIX 平台强制凭证权限 0600。

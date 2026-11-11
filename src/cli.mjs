@@ -5,7 +5,7 @@ import {CliError,credential,authStatus,redact,exists} from './storage.mjs';
 import {importCredentials} from './auth.mjs';
 import {connect,models,allowed} from './mcp.mjs';
 import {generate,query,waitFor} from './images.mjs';
-import {capabilities,skillSource,skillStatus,installSkill,checkUpdate,updateInstall,ROOT,targetOptions} from './maintenance.mjs';
+import {capabilities,skillSource,skillStatus,installSkill,checkUpdate,updateInstall,ROOT,targetOptions,prepareUpdate,updatePolicy,runProcess} from './maintenance.mjs';
 function parse(argv){
  const o={},words=[];for(let i=0;i<argv.length;i++){const a=argv[i];if(a.startsWith('--')){const k=a.slice(2);if(!k||k.includes('='))throw new CliError('INVALID_OPTION','Use --option value.');const booleans=['json','help','replace','submit','wait','yes'];let v=booleans.includes(k)?true:argv[++i];if(v===undefined||String(v).startsWith('--'))throw new CliError('MISSING_OPTION_VALUE',`Missing value for --${k}.`);if(k==='reference')(o[k]??=[]).push(v);else if(k in o)throw new CliError('DUPLICATE_OPTION',`Duplicate --${k}.`);else o[k]=v;}else words.push(a);}
  const key=words.join(' ')||'help';const contract=capabilities().commandContracts[key];if(!contract)throw new CliError('UNKNOWN_COMMAND','Unknown command.',{command:key});for(const k of Object.keys(o))if(!('--'+k in contract.options))throw new CliError('UNKNOWN_OPTION',`Unsupported option --${k}.`,{command:key});return {key,o};
@@ -21,8 +21,9 @@ async function main(){
  if(key==='skill source'||key==='skill list'){if(o.name&&o.name!=='toapiscli')throw new CliError('UNKNOWN_SKILL','Unknown Skill name.');return skillSource();}
  if(key==='skill status')return skillStatus(o);
  if(['skill install','skill update'].includes(key)){targetOptions(o);const s=await skillStatus(o);if(s.installed&&(!s.managed||s.edited))throw new CliError('TARGET_CONFLICT','Resolve existing target before installation.');let auth;if(o['credentials-file'])auth=await importCredentials(o['credentials-file']);return {...await installSkill(o),...(auth?{auth}:{})};}
+ if(key==='prepare')return prepareUpdate();if(key==='update policy')return updatePolicy(o);
  if(key==='update check')return {ok:true,...await checkUpdate({force:true})};if(key==='update install')return updateInstall(o);
- let update;if(['models list','image generate'].includes(key))update=await checkUpdate();
+ let update;if(['models list','image generate'].includes(key)){update=await prepareUpdate();if(update.status==='updated'){const child=await runProcess(process.execPath,[update.updatedEntry,...args],{timeoutMs:1100000,acceptFailure:true});process.exitCode=child.code||0;const result=JSON.parse(child.stdout);return {...result,update};}}
  const c=await credential();const m=await connect(c);
  try{
   if(key==='models list')return {ok:true,models:await models(m),update};
