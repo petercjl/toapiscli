@@ -2,7 +2,7 @@
 name: toapiscli
 description: 通过 ToAPIs MCP 使用已配置员工凭证调用批准的生图模型，支持文生图、参考图编辑、任务恢复与结果下载；用于用户指定 toapiscli 的图片任务。
 metadata:
-  version: 0.1.0-next.1
+  version: 0.1.0
 ---
 
 # ToAPIs CLI
@@ -14,7 +14,7 @@ metadata:
 
 能力要求是 Node.js 22+、执行命令、读写本地文件和 HTTPS。任意满足要求的当前 Agent 可调用。先读取 [通用适配](adapters/generic.json)，再从本 Skill 的实际目录解析独立运行时：`node <SKILL_ROOT>/.runtime/dist/cli.mjs`。以下以 `CLI` 表示这一入口。使用 `CLI capabilities --json` 发现当前合同；`CLI doctor --json` 检查依赖与脱敏认证状态。
 
-本 Skill 与运行时由同一 npm 包管理，版本为 `0.1.0-next.1`。包安装和更新说明见包根 INSTALL.md、UPDATE.md；升级只同步当前 Agent 明确指定的目录。
+本 Skill 与运行时由同一 npm 包管理，版本为 `0.1.0`。包安装和更新说明见包根 INSTALL.md、UPDATE.md；升级只同步当前 Agent 明确指定的目录。
 
 ## 主线
 

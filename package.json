@@ -1,6 +1,6 @@
 {
   "name": "@petercjl/toapiscli",
-  "version": "0.1.0-next.1",
+  "version": "0.1.0",
   "description": "Image-only ToAPIs MCP CLI with a portable Agent Skill and employee-owned credentials",
   "type": "module",
   "license": "MIT",
