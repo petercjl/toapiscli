@@ -366,7 +366,7 @@
           "type": "string"
         }
       },
-      "sideEffects": "none",
+      "sideEffects": "local-write",
       "effects": [
         "installation-policy"
       ]

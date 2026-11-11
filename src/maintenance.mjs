@@ -188,7 +188,7 @@ export function capabilities(){
  };
  for(const [name,c] of Object.entries(commands)){
   c.options=Object.fromEntries(Object.entries(c.options).map(([k,v])=>['--'+k,{type:v==='boolean'?'boolean':'string',...(v==='string[]'?{repeatable:true}:{})}]));
-  c.effects=c.sideEffects;c.sideEffects=['update install','prepare','models list','image generate'].includes(name)?'package-and-skill-update':(['skill install','skill update','auth import','image generate','task get','task wait'].includes(name)?'local-write':'none');
+  c.effects=c.sideEffects;c.sideEffects=['update install','prepare','models list','image generate'].includes(name)?'package-and-skill-update':(['skill install','skill update','auth import','update policy','image generate','task get','task wait'].includes(name)?'local-write':'none');
  }
  manifest.installationLifecycle={...manifest.installationLifecycle,agentNeutral:true,targetRequired:true,hostRegistrationRequired:true,installationMode:'copy',sharedLinksAllowed:false,isolatedRuntimeRequired:true};
  manifest.automaticUpdates={...manifest.automaticUpdates,enabledByDefault:true,intervalHours:24,configuration:'TOAPISCLI_UPDATE_CHECK',disable:'TOAPISCLI_UPDATE_CHECK=0',policyCommand:'update policy --target <exact-directory> --mode auto|off',policyStorage:'outside package, scoped by exact target',compatibility:'stable same major; for 0.x same minor',disableInstall:'TOAPISCLI_AUTO_UPDATE=0',recovery:'Offline/failure uses verified previous runtime; interrupted sync blocks tasks until recovery.'};
