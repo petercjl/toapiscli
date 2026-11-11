@@ -1,0 +1,4 @@
+interface:
+  display_name: "ToAPIs 生图"
+  short_description: "使用员工配置文件调用批准模型生图、恢复任务并核对实际积分"
+  default_prompt: "使用 $toapiscli，根据我的要求生成图片。"

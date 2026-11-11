@@ -1,0 +1,15 @@
+{
+  "schema": "portable-skill-adapter",
+  "platform": "generic",
+  "status": "implemented",
+  "mappings": [{
+    "capability_id": "media.image.generate",
+    "status": "implemented",
+    "implementation": {"kind":"cli","entry":".runtime/dist/cli.mjs","runtime":"Node.js >=22"},
+    "features": ["text-to-image", "reference-images", "model-selection", "resolution", "task-recovery", "local-download", "billing"],
+    "discovery": "node <SKILL_ROOT>/.runtime/dist/cli.mjs capabilities --json",
+    "configuration": "Import administrator-provided JSON through auth import --file",
+    "permissions": ["command execution", "HTTPS", "local file access", "user authorization for generation charges"],
+    "normalization": "CLI JSON contains ok, artifacts, task_id, cost, warnings and raw provider result; preserve failed/unknown states."
+  }]
+}

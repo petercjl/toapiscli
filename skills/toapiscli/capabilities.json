@@ -1,0 +1,17 @@
+{
+  "schema": "portable-skill-capabilities",
+  "schema_version": "1.0.0",
+  "skill": "toapiscli",
+  "target_platforms": ["generic"],
+  "host_resolution": {"fallback_adapter":"generic"},
+  "capabilities": [{
+    "id": "media.image.generate",
+    "purpose": "Execute explicit image generation through ToAPIs MCP",
+    "required": true,
+    "required_features": ["text-to-image", "reference-images", "model-selection", "resolution", "task-recovery", "local-download", "billing"],
+    "input_fields": ["model", "prompt", "reference", "resolution", "aspect", "out-directory", "submit"],
+    "output_fields": ["ok", "artifacts", "task_id", "cost", "warnings", "result"],
+    "side_effects": {"external_mutation":true,"may_cost_money":true,"authorization":"Generate only within user-authorized model, count and reference scope."},
+    "errors": ["AUTH_REQUIRED", "MODEL_NOT_ALLOWED", "KEY_MODEL_DENIED", "SUBMISSION_UNCERTAIN", "PROVIDER_ERROR"]
+  }]
+}

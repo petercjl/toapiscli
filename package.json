@@ -1,0 +1,50 @@
+{
+  "name": "@petercjl/toapiscli",
+  "version": "0.1.0-next.1",
+  "description": "Image-only ToAPIs MCP CLI with a portable Agent Skill and employee-owned credentials",
+  "type": "module",
+  "license": "MIT",
+  "bin": {
+    "toapiscli": "bin/toapiscli.mjs"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "files": [
+    "bin",
+    "dist",
+    "skills",
+    "capabilities.json",
+    "README.md",
+    "INSTALL.md",
+    "UPDATE.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "test": "node --test test/*.test.mjs",
+    "prepack": "node scripts/validate-package.mjs",
+    "postinstall": "node bin/toapiscli.mjs installation-notice"
+  },
+  "devDependencies": {
+    "@modelcontextprotocol/sdk": "1.32.2",
+    "esbuild": "0.28.2"
+  },
+  "publishConfig": {
+    "access": "public",
+    "tag": "latest"
+  },
+  "agentPackage": {
+    "kind": "cli-skill",
+    "skill": "toapiscli",
+    "eligibility": "Any Agent with Node.js 22+, command execution, local files and HTTPS"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/petercjl/toapiscli.git"
+  },
+  "homepage": "https://github.com/petercjl/toapiscli#readme",
+  "bugs": {
+    "url": "https://github.com/petercjl/toapiscli/issues"
+  }
+}

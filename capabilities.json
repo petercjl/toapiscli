@@ -1,0 +1,583 @@
+{
+  "ok": true,
+  "schemaVersion": 1,
+  "package": "@petercjl/toapiscli",
+  "version": "0.1.0-next.1",
+  "kind": "cli-skill",
+  "skills": [
+    "toapiscli"
+  ],
+  "models": [
+    "doubao-seedream-5-5",
+    "gemini-nano-banana-2.1",
+    "gpt-image-2.6-sunburst"
+  ],
+  "endpoints": {
+    "cn": "https://api.toapis.cn/mcp",
+    "com": "https://api.toapis.com/mcp"
+  },
+  "transport": "MCP Streamable HTTP",
+  "commandContracts": {
+    "version": {
+      "options": {
+        "--json": {
+          "type": "boolean"
+        },
+        "--help": {
+          "type": "boolean"
+        }
+      },
+      "sideEffects": "none",
+      "effects": []
+    },
+    "capabilities": {
+      "options": {
+        "--json": {
+          "type": "boolean"
+        },
+        "--help": {
+          "type": "boolean"
+        }
+      },
+      "sideEffects": "none",
+      "effects": []
+    },
+    "doctor": {
+      "options": {
+        "--json": {
+          "type": "boolean"
+        },
+        "--help": {
+          "type": "boolean"
+        }
+      },
+      "sideEffects": "none",
+      "effects": []
+    },
+    "auth import": {
+      "options": {
+        "--json": {
+          "type": "boolean"
+        },
+        "--help": {
+          "type": "boolean"
+        },
+        "--file": {
+          "type": "string"
+        },
+        "--replace": {
+          "type": "boolean"
+        }
+      },
+      "sideEffects": "local-write",
+      "effects": [
+        "credential-copy",
+        "free-network-validation"
+      ]
+    },
+    "auth status": {
+      "options": {
+        "--json": {
+          "type": "boolean"
+        },
+        "--help": {
+          "type": "boolean"
+        }
+      },
+      "sideEffects": "none",
+      "effects": []
+    },
+    "models list": {
+      "options": {
+        "--json": {
+          "type": "boolean"
+        },
+        "--help": {
+          "type": "boolean"
+        }
+      },
+      "sideEffects": "none",
+      "effects": [
+        "free-network",
+        "update-cache"
+      ]
+    },
+    "models docs": {
+      "options": {
+        "--json": {
+          "type": "boolean"
+        },
+        "--help": {
+          "type": "boolean"
+        },
+        "--model": {
+          "type": "string"
+        }
+      },
+      "sideEffects": "none",
+      "effects": [
+        "free-network"
+      ]
+    },
+    "image generate": {
+      "options": {
+        "--json": {
+          "type": "boolean"
+        },
+        "--help": {
+          "type": "boolean"
+        },
+        "--model": {
+          "type": "string"
+        },
+        "--prompt": {
+          "type": "string"
+        },
+        "--prompt-file": {
+          "type": "string"
+        },
+        "--resolution": {
+          "type": "string"
+        },
+        "--aspect": {
+          "type": "string"
+        },
+        "--reference": {
+          "type": "string",
+          "repeatable": true
+        },
+        "--out-directory": {
+          "type": "string"
+        },
+        "--submit": {
+          "type": "boolean"
+        },
+        "--wait": {
+          "type": "boolean"
+        },
+        "--timeout": {
+          "type": "string"
+        }
+      },
+      "sideEffects": "local-write",
+      "effects": [
+        "paid-generation",
+        "reference-upload",
+        "task-files"
+      ]
+    },
+    "task get": {
+      "options": {
+        "--json": {
+          "type": "boolean"
+        },
+        "--help": {
+          "type": "boolean"
+        },
+        "--directory": {
+          "type": "string"
+        }
+      },
+      "sideEffects": "local-write",
+      "effects": [
+        "free-network",
+        "task-snapshot"
+      ]
+    },
+    "task wait": {
+      "options": {
+        "--json": {
+          "type": "boolean"
+        },
+        "--help": {
+          "type": "boolean"
+        },
+        "--directory": {
+          "type": "string"
+        },
+        "--timeout": {
+          "type": "string"
+        }
+      },
+      "sideEffects": "local-write",
+      "effects": [
+        "free-network",
+        "task-snapshot",
+        "download"
+      ]
+    },
+    "usage": {
+      "options": {
+        "--json": {
+          "type": "boolean"
+        },
+        "--help": {
+          "type": "boolean"
+        },
+        "--start": {
+          "type": "string"
+        },
+        "--end": {
+          "type": "string"
+        }
+      },
+      "sideEffects": "none",
+      "effects": [
+        "free-network"
+      ]
+    },
+    "balance": {
+      "options": {
+        "--json": {
+          "type": "boolean"
+        },
+        "--help": {
+          "type": "boolean"
+        }
+      },
+      "sideEffects": "none",
+      "effects": [
+        "free-network"
+      ]
+    },
+    "skill source": {
+      "options": {
+        "--json": {
+          "type": "boolean"
+        },
+        "--help": {
+          "type": "boolean"
+        },
+        "--name": {
+          "type": "string"
+        }
+      },
+      "sideEffects": "none",
+      "effects": []
+    },
+    "skill list": {
+      "options": {
+        "--json": {
+          "type": "boolean"
+        },
+        "--help": {
+          "type": "boolean"
+        }
+      },
+      "sideEffects": "none",
+      "effects": []
+    },
+    "skill status": {
+      "options": {
+        "--json": {
+          "type": "boolean"
+        },
+        "--help": {
+          "type": "boolean"
+        },
+        "--target": {
+          "type": "string"
+        },
+        "--agent": {
+          "type": "string"
+        }
+      },
+      "sideEffects": "none",
+      "effects": []
+    },
+    "skill install": {
+      "options": {
+        "--json": {
+          "type": "boolean"
+        },
+        "--help": {
+          "type": "boolean"
+        },
+        "--target": {
+          "type": "string"
+        },
+        "--agent": {
+          "type": "string"
+        },
+        "--credentials-file": {
+          "type": "string"
+        }
+      },
+      "sideEffects": "local-write",
+      "effects": [
+        "selected-target-write",
+        "optional-credential-import"
+      ]
+    },
+    "skill update": {
+      "options": {
+        "--json": {
+          "type": "boolean"
+        },
+        "--help": {
+          "type": "boolean"
+        },
+        "--target": {
+          "type": "string"
+        },
+        "--agent": {
+          "type": "string"
+        }
+      },
+      "sideEffects": "local-write",
+      "effects": [
+        "selected-target-write",
+        "backup"
+      ]
+    },
+    "update check": {
+      "options": {
+        "--json": {
+          "type": "boolean"
+        },
+        "--help": {
+          "type": "boolean"
+        }
+      },
+      "sideEffects": "none",
+      "effects": [
+        "registry-read",
+        "update-cache"
+      ]
+    },
+    "update install": {
+      "options": {
+        "--json": {
+          "type": "boolean"
+        },
+        "--help": {
+          "type": "boolean"
+        },
+        "--target": {
+          "type": "string"
+        },
+        "--agent": {
+          "type": "string"
+        },
+        "--version": {
+          "type": "string"
+        },
+        "--yes": {
+          "type": "boolean"
+        }
+      },
+      "sideEffects": "package-and-skill-update",
+      "effects": [
+        "npm-stage",
+        "selected-target-update",
+        "backup"
+      ]
+    },
+    "installation-notice": {
+      "options": {
+        "--json": {
+          "type": "boolean"
+        },
+        "--help": {
+          "type": "boolean"
+        }
+      },
+      "sideEffects": "none",
+      "effects": []
+    },
+    "help": {
+      "options": {
+        "--json": {
+          "type": "boolean"
+        },
+        "--help": {
+          "type": "boolean"
+        }
+      },
+      "sideEffects": "none",
+      "effects": []
+    }
+  },
+  "agentEligibility": "capability-based; valid-name-with-generic-fallback",
+  "requiredCapabilities": [
+    "Node.js >=22",
+    "command execution",
+    "local files",
+    "HTTPS"
+  ],
+  "defaults": {
+    "resolution": "2K",
+    "aspect": "1:1",
+    "count": 1,
+    "site": "cn"
+  },
+  "credentials": {
+    "input": "administrator-provided JSON file",
+    "command": "auth import --file",
+    "schema": {
+      "schemaVersion": 1,
+      "site": "cn|com",
+      "apiKey": "secret string",
+      "label": "optional string"
+    },
+    "storage": "user-only file outside package; Windows inherits user profile ACL",
+    "neverIncludedInPackage": true
+  },
+  "installationLifecycle": {
+    "skillRequired": true,
+    "updateRequiresSkillSync": true,
+    "required_components": [
+      "cli",
+      "skill"
+    ],
+    "install": "INSTALL.md",
+    "update": "UPDATE.md",
+    "verification": "skill status --target <exact-directory> --json; host verifies discovery",
+    "physicalIsolation": true,
+    "agentNeutral": true,
+    "targetRequired": true,
+    "hostRegistrationRequired": true,
+    "installationMode": "copy",
+    "sharedLinksAllowed": false,
+    "isolatedRuntimeRequired": true
+  },
+  "automaticUpdates": {
+    "trigger": "models list and image generate",
+    "timeoutMs": 1200,
+    "cacheHours": 24,
+    "optOut": "TOAPISCLI_UPDATE_CHECK=0",
+    "automaticInstall": false,
+    "installCommand": "update install --target <exact-directory> --yes",
+    "scope": "selected Agent runtime and Skill; global bootstrap unchanged",
+    "enabledByDefault": true,
+    "intervalHours": 24,
+    "configuration": "TOAPISCLI_UPDATE_CHECK",
+    "disable": "TOAPISCLI_UPDATE_CHECK=0",
+    "recovery": "Offline keeps installed runtime; explicit update stages package and backs up selected Skill."
+  },
+  "discoveryContract": {
+    "schemaVersion": 1,
+    "entryPoints": [
+      {
+        "argv": [
+          "capabilities",
+          "--json"
+        ],
+        "result": "manifest"
+      }
+    ],
+    "commandsField": "commandContracts",
+    "version": {
+      "command": "version",
+      "argv": [
+        "version",
+        "--json"
+      ],
+      "fields": {
+        "package": {
+          "field": "package",
+          "type": "string"
+        },
+        "version": {
+          "field": "version",
+          "type": "string"
+        }
+      }
+    },
+    "skillCollection": {
+      "namesField": "skills",
+      "default": "toapiscli",
+      "selector": {
+        "option": "--name",
+        "type": "string"
+      },
+      "enumeration": {
+        "argv": [
+          "skill",
+          "list",
+          "--json"
+        ],
+        "itemsField": "items",
+        "completeField": "complete"
+      },
+      "namedSource": [
+        "skill",
+        "source",
+        "--name",
+        "{skill}",
+        "--json"
+      ]
+    }
+  },
+  "maintenanceContract": {
+    "schemaVersion": 1,
+    "agentEligibility": "valid-name-with-generic-fallback",
+    "hostDiscoveryAuthority": "host",
+    "targetOptions": {
+      "--target": {
+        "kind": "skill-directory",
+        "required": true
+      }
+    },
+    "source": {
+      "name": {
+        "field": "name",
+        "type": "string"
+      },
+      "package": {
+        "field": "package",
+        "type": "string"
+      },
+      "version": {
+        "field": "version",
+        "type": "string"
+      },
+      "path": {
+        "field": "path",
+        "type": "string"
+      }
+    },
+    "status": {
+      "name": {
+        "field": "name",
+        "type": "string"
+      },
+      "package": {
+        "field": "package",
+        "type": "string"
+      },
+      "version": {
+        "field": "version",
+        "type": "string"
+      },
+      "target": {
+        "field": "target",
+        "type": "string"
+      },
+      "installed": {
+        "field": "installed",
+        "type": "boolean"
+      },
+      "managed": {
+        "field": "managed",
+        "type": "boolean"
+      },
+      "current": {
+        "field": "current",
+        "type": "boolean"
+      },
+      "edited": {
+        "field": "edited",
+        "type": "boolean"
+      },
+      "verification": {
+        "field": "verification",
+        "type": "object"
+      },
+      "recovery": {
+        "field": "recovery",
+        "type": "object"
+      }
+    }
+  }
+}

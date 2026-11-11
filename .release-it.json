@@ -1,0 +1,16 @@
+{
+  "hooks": {
+    "after:bump": [
+      "npm run build",
+      "npm test",
+      "node scripts/validate-package.mjs"
+    ]
+  },
+  "npm": {
+    "publishArgs": [
+      "--access",
+      "public",
+      "--provenance"
+    ]
+  }
+}
